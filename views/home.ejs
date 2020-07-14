@@ -1,0 +1,28 @@
+<link rel="stylesheet" href="/css/home.css">
+<h1 class="heading">Welcome to <%= title %>Page</h1>
+
+<section id="feed-posts">
+    <h4> Posts </h4>
+    <% if (locals.user) {%>
+    <form action="/posts/create" id="new-post-form" method="POST">
+        <textarea name="content" id="new-post-content" cols="30" rows="3" placeholder="Type Here..."></textarea>
+        <input type="submit" value="POST">
+    </form>
+    <%}%>
+    <div id="posts-list-container">
+        <ul>
+            <% for (post of posts) {%>
+                <%- include('_posts') -%>
+            <%}%>
+        </ul> 
+    </div>
+</section>
+
+<section id="user-friends">
+    <h4>Friends</h4>
+    <% for (let u of all_users) {%>
+        <a href="/users/profile/<%= u.id %>"><%= u.name %></a>
+    <%}%>
+</section>
+
+<script src="/js/home_posts.js"></script>
